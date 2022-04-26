@@ -43,7 +43,7 @@ namespace vsgSDL {
             render(viewer);
         } else return false;
 
-        if(!continuousKey) {
+        if(continuousKey) {
             pollContinuousLast();
         }
 
