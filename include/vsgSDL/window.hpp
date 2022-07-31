@@ -8,8 +8,8 @@ namespace vsgSDL {
         Window();
         ~Window();
 
-        std::function<void()> focusGained;
-        std::function<void()> focusLost;
+        std::function<void(const vsg::ref_ptr<vsg::Window>)> focusGained;
+        std::function<void(const vsg::ref_ptr<vsg::Window>)> focusLost;
         std::function<void(const char[SDL_TEXTINPUTEVENT_TEXT_SIZE])> textInput;
         std::function<void(const vsg::ref_ptr<vsg::Viewer>)> render;
         std::function<void(const vsg::ref_ptr<vsg::Window>,

@@ -4,8 +4,10 @@
 #include <vsg/viewer/WindowAdapter.h>
 #include <vsg/ui/ScrollWheelEvent.h>
 
-#include <SDL.h>
-#include <SDL_vulkan.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_vulkan.h>
+
+#include<vsg/all.h>
 
 namespace vsgSDL {
     static constexpr auto instanceSurfaceName = []() constexpr {
@@ -97,10 +99,10 @@ namespace vsgSDL {
     }
 
     bool Window::initSDLVulkan(std::string dynLib) const {
-        if(SDL_Vulkan_LoadLibrary(dynLib.c_str()) == -1)
-            return false;
-
-        return true;
+        if (dynLib == "")
+            return SDL_Vulkan_LoadLibrary(NULL) != -1;
+        else 
+            return SDL_Vulkan_LoadLibrary(dynLib.c_str()) == -1;
     }
 
     bool Window::initSDLVulkanSurface() {
@@ -232,11 +234,11 @@ namespace vsgSDL {
                 } break;
 
                 case SDL_WINDOWEVENT_FOCUS_GAINED: {
-                    focusGained();
+                    focusGained(adapter);
                 } break;
 
                 case SDL_WINDOWEVENT_FOCUS_LOST: {
-                    focusLost();
+                    focusLost(adapter);
                 } break;
 
                 case SDL_WINDOWEVENT_CLOSE: {
