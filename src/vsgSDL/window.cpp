@@ -101,8 +101,8 @@ namespace vsgSDL {
     bool Window::initSDLVulkan(std::string dynLib) const {
         if (dynLib == "")
             return SDL_Vulkan_LoadLibrary(NULL) != -1;
-        else 
-            return SDL_Vulkan_LoadLibrary(dynLib.c_str()) == -1;
+        else
+            return SDL_Vulkan_LoadLibrary(dynLib.c_str()) != -1;
     }
 
     bool Window::initSDLVulkanSurface() {
