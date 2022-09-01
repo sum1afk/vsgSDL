@@ -3,7 +3,7 @@
  Integrates VulkanSceneGraph with SDL
  https://github.com/vsg-dev/VulkanSceneGraph
 
-## setup step
+## Building
 
 ### On Windows
 ```
