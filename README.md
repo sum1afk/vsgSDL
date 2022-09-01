@@ -7,13 +7,13 @@
 
 ### On Windows
 ```
-git clone https://github.com/ptrfun/vsgSDL.git
+git clone https://github.com/sum1afk/vsgSDL.git
 cd vsgSDL
 cmake -S . -B build -A x64
 ```
 After running CMake open the generated VSG.sln file and build the All target. Once built you can run the install target.If you used vspkg to manage your package,you can run
 ```
-git clone https://github.com/ptrfun/vsgSDL.git
+git clone https://github.com/sum1afk/vsgSDL.git
 cd vsgSDL
 cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=C:/path/to/vcpkg/vcpkg.cmake -A x64
 ```
@@ -56,4 +56,4 @@ while(true)
 
 ## code example
 
-An [example](https://github.com/ptrfun/vsgSDL/tree/main/example/vsgSDLexample)
+An [example](https://github.com/sum1afk/vsgSDL/tree/main/example/vsgSDLexample)
