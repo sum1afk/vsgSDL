@@ -1,58 +1,76 @@
-#include <vsgSDL/version.hpp>
+#ifndef VSGSDL_WINDOW_HPP
+#define VSGSDL_WINDOW_HPP
+
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#if TARGET_OS_MAC
+#define VK_USE_PLATFORM_MACOS_MVK
+#elif TARGET_OS_IPHONE
+#define VK_USE_PLATFORM_IOS_MVK
+#endif
+#endif
+
 #include <vsgSDL/keyboard.hpp>
 #include <vsgSDL/mouse.hpp>
+#include <vsgSDL/version.hpp>
 
 namespace vsgSDL {
-    class vsgSDL_LIB Window {
-    public:
-        Window();
-        ~Window();
+class vsgSDL_LIB Window {
+public:
+  Window();
+  ~Window();
 
-        std::function<void(const vsg::ref_ptr<vsg::Window>)> focusGained;
-        std::function<void(const vsg::ref_ptr<vsg::Window>)> focusLost;
-        std::function<void(const char[SDL_TEXTINPUTEVENT_TEXT_SIZE])> textInput;
-        std::function<void(const vsg::ref_ptr<vsg::Viewer>)> render;
-        std::function<void(const vsg::ref_ptr<vsg::Window>,
-                           const vsg::ref_ptr<vsg::Viewer>,
-                           const vsg::ref_ptr<vsg::WindowTraits>)> renderInit;
-        std::function<void(const vsg::ref_ptr<vsg::Viewer>)> renderDeinit;
+  std::function<void(const vsg::ref_ptr<vsg::Window>)> focusGained;
+  std::function<void(const vsg::ref_ptr<vsg::Window>)> focusLost;
+  std::function<void(const char[SDL_TEXTINPUTEVENT_TEXT_SIZE])> textInput;
+  std::function<void(const vsg::ref_ptr<vsg::Viewer>)> render;
+  std::function<void(const vsg::ref_ptr<vsg::Window>,
+                     const vsg::ref_ptr<vsg::Viewer>,
+                     const vsg::ref_ptr<vsg::WindowTraits>)>
+      renderInit;
+  std::function<void(const vsg::ref_ptr<vsg::Viewer>)> renderDeinit;
 
-        bool create(std::string title, int x, int y, uint32_t width, uint32_t height, Uint32 sdlWinFlags,
-                    bool vulkanDebugLayer, bool vulkanAPIDumpLayer, std::string vulkanDynLib = "");
+  bool create(std::string title, int x, int y, uint32_t width, uint32_t height,
+              Uint32 sdlWinFlags, bool vulkanDebugLayer,
+              bool vulkanAPIDumpLayer, std::string vulkanDynLib = "");
 
-        bool process(const bool continuousKey);
-    private:
-        vsg::ref_ptr<vsg::WindowTraits> traits;
-        vsg::ref_ptr<vsg::Instance> instance;
-        vsg::ref_ptr<vsg::Surface> surface;
-        vsg::ref_ptr<vsg::Window> adapter;
-        vsg::ref_ptr<KeyboardMap> keyboardMap;
-        SDL_Window *sdlWindow;
-        vsg::ref_ptr<vsg::Viewer> viewer;
+  bool process(const bool continuousKey);
 
-        bool initInstance(std::string title, uint32_t width, uint32_t height,
-                          bool debugLayer, bool apiDumpLayer);
-        bool initSDL();
-        bool initSDLVulkan(std::string dynLib = "") const;
-        bool initSDLVulkanSurface();
-    protected:
-        void pollEvents(const bool continuousKey);
+private:
+  vsg::ref_ptr<vsg::WindowTraits> traits;
+  vsg::ref_ptr<vsg::Instance> instance;
+  vsg::ref_ptr<vsg::Surface> surface;
+  vsg::ref_ptr<vsg::Window> adapter;
+  vsg::ref_ptr<KeyboardMap> keyboardMap;
+  SDL_Window *sdlWindow;
+  vsg::ref_ptr<vsg::Viewer> viewer;
 
-        void pollContinuousLast();
-        void pollContinuous();
+  bool initInstance(std::string title, uint32_t width, uint32_t height,
+                    bool debugLayer, bool apiDumpLayer);
+  bool initSDL();
+  bool initSDLVulkan(std::string dynLib = "") const;
+  bool initSDLVulkanSurface();
 
-        int oldKeyCountSDL;
-        Uint8 *oldKeyStateSDL;
+protected:
+  void pollEvents(const bool continuousKey);
 
-        void keyPressEvent(const SDL_KeyboardEvent *e) const;
-        void keyReleaseEvent(const SDL_KeyboardEvent *e) const;
-        void mouseMoveEvent(const SDL_MouseMotionEvent *e) const;
-        void mousePressEvent(const SDL_MouseButtonEvent *e) const;
-        void mouseReleaseEvent(const SDL_MouseButtonEvent *e) const;
-        void wheelEvent(const SDL_MouseWheelEvent *e) const;
-        void moveEvent(const SDL_WindowEvent *e) const;
-        void resizeEvent(const SDL_WindowEvent *e) const;
+  void pollContinuousLast();
+  void pollContinuous();
 
-        vsg::clock::time_point sdlTimeToVSG(Uint32 timestamp) const;
-    };
-}
+  int oldKeyCountSDL;
+  Uint8 *oldKeyStateSDL;
+
+  void keyPressEvent(const SDL_KeyboardEvent *e) const;
+  void keyReleaseEvent(const SDL_KeyboardEvent *e) const;
+  void mouseMoveEvent(const SDL_MouseMotionEvent *e) const;
+  void mousePressEvent(const SDL_MouseButtonEvent *e) const;
+  void mouseReleaseEvent(const SDL_MouseButtonEvent *e) const;
+  void wheelEvent(const SDL_MouseWheelEvent *e) const;
+  void moveEvent(const SDL_WindowEvent *e) const;
+  void resizeEvent(const SDL_WindowEvent *e) const;
+
+  vsg::clock::time_point sdlTimeToVSG(Uint32 timestamp) const;
+};
+} // namespace vsgSDL
+
+#endif

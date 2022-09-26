@@ -1,3 +1,6 @@
+#ifndef VSGSDL_KEYBOARD_HPP
+#define VSGSDL_KEYBOARD_HPP
+
 #include <vsg/ui/KeyEvent.h>
 
 #include <SDL_keycode.h>
@@ -18,3 +21,5 @@ namespace vsgSDL {
         std::unordered_map<SDL_Keycode, vsg::KeySymbol> keycodeSingular;
     };
 }
+
+#endif

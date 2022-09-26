@@ -1,3 +1,7 @@
+if(NOT CMAKE_DEBUG_POSTFIX)
+  set(CMAKE_DEBUG_POSTFIX d)
+endif()
+
 set(HEADERS
     ${CMAKE_SOURCE_DIR}/include/vsgSDL/export.hpp
     ${CMAKE_SOURCE_DIR}/include/vsgSDL/keyboard.hpp
