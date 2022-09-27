@@ -1,6 +1,10 @@
 #ifndef VSGSDL_WINDOW_HPP
 #define VSGSDL_WINDOW_HPP
 
+#ifdef WIN32
+#define VK_USE_PLATFORM_WIN32_KHR
+#endif
+
 #ifdef __APPLE__
 #include <TargetConditionals.h>
 #if TARGET_OS_MAC
