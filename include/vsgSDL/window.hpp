@@ -2,19 +2,14 @@
 #define VSGSDL_WINDOW_HPP
 
 #ifdef WIN32
-// min() and max() macros fight against standard c++ pendants
-#define NOMINMAX
-// missing constant
 #define VK_USE_PLATFORM_WIN32_KHR
 #endif
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
 #if TARGET_OS_MAC
-// missing constant
 #define VK_USE_PLATFORM_MACOS_MVK
 #elif TARGET_OS_IPHONE
-// actually unused, but may come up later
 #define VK_USE_PLATFORM_IOS_MVK
 #endif
 #endif

@@ -19,16 +19,9 @@ set(SOURCES
 )
 
 add_library(vsgSDL ${HEADERS} ${SOURCES})
-#if(MSVC)
-    include (GenerateExportHeader)          
-    GENERATE_EXPORT_HEADER(vsgSDL           # generates the export header shared_EXPORTS.h automatically
-        BASE_NAME vsgSDL
-        EXPORT_MACRO_NAME vsgSDL_EXPORTS
-        EXPORT_FILE_NAME vsgSDL_EXPORTS.h
-        STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC)
-    set_property(TARGET vsgSDL PROPERTY POSITION_INDEPENDENT_CODE ON)
-    set_property(TARGET vsgSDL PROPERTY CXX_STANDARD 17)
-#endif()
+
+set_property(TARGET vsgSDL PROPERTY POSITION_INDEPENDENT_CODE ON)
+set_property(TARGET vsgSDL PROPERTY CXX_STANDARD 17)
 
 target_include_directories(vsgSDL PUBLIC
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
