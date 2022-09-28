@@ -9,6 +9,11 @@
 
 #include<vsg/all.h>
 
+#ifdef WIN32
+#undef min
+#undef max
+#endif
+
 namespace vsgSDL {
     static constexpr auto instanceSurfaceName = []() constexpr {
         #if defined(VK_USE_PLATFORM_WIN32_KHR)
