@@ -1,5 +1,4 @@
-#ifndef VSGSDL_WINDOW_HPP
-#define VSGSDL_WINDOW_HPP
+#pragma once
 
 #include <vsgSDL/version.hpp>
 #include <vsgSDL/keyboard.hpp>
@@ -59,5 +58,3 @@ namespace vsgSDL {
         vsg::clock::time_point sdlTimeToVSG(Uint32 timestamp) const;
     };
 }
-
-#endif

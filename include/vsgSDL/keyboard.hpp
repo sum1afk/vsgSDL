@@ -1,5 +1,4 @@
-#ifndef VSGSDL_KEYBOARD_HPP
-#define VSGSDL_KEYBOARD_HPP
+#pragma once
 
 #include <vsg/ui/KeyEvent.h>
 
@@ -22,4 +21,3 @@ namespace vsgSDL {
     };
 }
 
-#endif

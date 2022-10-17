@@ -1,5 +1,4 @@
-#ifndef VSGSDL_EXPORT_HPP
-#define VSGSDL_EXPORT_HPP
+#pragma once
 
 #if defined(vsgSDL_EXPORT)
 #define vsgSDL_LIB __declspec(dllexport)
@@ -9,4 +8,3 @@
 #define vsgSDL_LIB
 #endif
 
-#endif
