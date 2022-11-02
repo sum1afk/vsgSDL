@@ -18,8 +18,8 @@
 #include <vsgSDL/window.hpp>
 
 #include <vsg/ui/ScrollWheelEvent.h>
-#include <vsg/viewer/Viewer.h>
-#include <vsg/viewer/WindowAdapter.h>
+#include <vsg/app/Viewer.h>
+#include <vsg/app/WindowAdapter.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
