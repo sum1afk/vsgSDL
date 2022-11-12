@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
-find_package(vsg 0.4.1 REQUIRED)
+find_package(vsg 1.0.0 REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(vsgXchange QUIET)
 
