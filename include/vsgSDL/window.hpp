@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vsgSDL/version.hpp>
 #include <vsgSDL/keyboard.hpp>
 #include <vsgSDL/mouse.hpp>

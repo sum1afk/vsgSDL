@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vsg/ui/KeyEvent.h>
 
 #include <SDL_keycode.h>
@@ -18,3 +20,4 @@ namespace vsgSDL {
         std::unordered_map<SDL_Keycode, vsg::KeySymbol> keycodeSingular;
     };
 }
+
