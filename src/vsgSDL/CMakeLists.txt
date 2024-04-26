@@ -24,10 +24,22 @@ target_include_directories(vsgSDL PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
+if(ANDROID)
+	target_compile_definitions(vsgSDL PRIVATE VSGSDL_PLATFORM_ANDROID)
+elseif(IOS)
+	target_compile_definitions(vsgSDL PRIVATE VSGSDL_PLATFORM_IOS)
+elseif(WIN32)
+	target_compile_definitions(vsgSDL PRIVATE VSGSDL_PLATFORM_WIN32 SDL_MAIN_HANDLED)
+elseif(APPLE)
+	target_compile_definitions(vsgSDL PRIVATE VSGSDL_PLATFORM_APPLE)
+else()
+	target_compile_definitions(vsgSDL PRIVATE VSGSDL_PLATFORM_XCB)
+endif()
+
 target_link_libraries(vsgSDL
     vsg::vsg
-    SDL2::SDL2
-    SDL2::SDL2main
+	$<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+	$<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
 )
 
 install(TARGETS vsgSDL
