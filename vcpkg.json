@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "dependencies": [
     "vsg",
-		{
-			"name": "sdl2",
-			"features": ["vulkan"]
-		}
+    {
+      "name": "sdl2",
+      "features": ["vulkan"]
+    }
   ]
 }

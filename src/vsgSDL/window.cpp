@@ -22,25 +22,25 @@ namespace vsgSDL {
     Window::Window() {
         keyboardMap = KeyboardMap::create();
         traits = vsg::WindowTraits::create();
-		oldKeyStateSDL = nullptr;
-		sdlWindow = nullptr;
+        oldKeyStateSDL = nullptr;
+        sdlWindow = nullptr;
     }
 
     Window::~Window() {
-		if(viewer.valid())
-		{
-        	renderDeinit(viewer);
-		}
+        if(viewer.valid())
+        {
+            renderDeinit(viewer);
+        }
 
-		if(oldKeyStateSDL != nullptr)
-		{
-        	delete[] oldKeyStateSDL;
-		}
+        if(oldKeyStateSDL != nullptr)
+        {
+            delete[] oldKeyStateSDL;
+        }
 
-		if(sdlWindow != nullptr)
-		{
-        	SDL_DestroyWindow(sdlWindow);
-		}
+        if(sdlWindow != nullptr)
+        {
+            SDL_DestroyWindow(sdlWindow);
+        }
 
         SDL_Quit();
         SDL_Vulkan_UnloadLibrary();
@@ -156,10 +156,10 @@ namespace vsgSDL {
             return false;
 
         if(!initSDL())
-			return false;
+            return false;
 
         if(!initSDLVulkan(vulkanDynLib))
-			return false;
+            return false;
 
         traits->x = x;
         traits->y = y;

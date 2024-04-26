@@ -113,9 +113,9 @@ int main(int argc, char** argv)
         false,
         false,
         ""))
-		{
-		return 0;
-	}
+        {
+        return 0;
+    }
     while (true) {
         bool scanforcontinouskeyinputs = false;
         if (!window.process(scanforcontinouskeyinputs)) break;
