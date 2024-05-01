@@ -8,8 +8,8 @@ project(vsgSDL
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(vsg 0.4.1 REQUIRED)
-find_package(SDL2 REQUIRED)
+find_package(vsg CONFIG REQUIRED)
+find_package(SDL2 CONFIG REQUIRED)
 find_package(vsgXchange QUIET)
 
 add_subdirectory(src/vsgSDL)

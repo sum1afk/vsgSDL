@@ -103,7 +103,7 @@ int main(int argc, char** argv)
     window.textInput = [](const char text[SDL_TEXTINPUTEVENT_TEXT_SIZE]) {
     };
 
-    window.create(
+    if(!window.create(
         "SDL_test",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
@@ -112,7 +112,10 @@ int main(int argc, char** argv)
         SDL_WINDOW_VULKAN,
         false,
         false,
-        "");
+        ""))
+        {
+        return 0;
+    }
     while (true) {
         bool scanforcontinouskeyinputs = false;
         if (!window.process(scanforcontinouskeyinputs)) break;
