@@ -2,6 +2,26 @@
 #include <vsgSDL/keyboard.hpp>
 #include <vsgSDL/mouse.hpp>
 
+#ifdef VSGSDL_PLATFORM_ANDROID
+#include <vsg/platform/android/Android_Window.h>
+#endif 
+
+#ifdef VSGSDL_PLATFORM_IOS
+#include <vsg/platform/ios/iOS_Window.h>
+#endif
+
+#ifdef VSGSDL_PLATFORM_APPLE
+#include <vsg/platform/macos/MacOS_Window.h>
+#endif
+
+#ifdef VSGSDL_PLATFORM_WIN32
+#include <vsg/platform/win32/Win32_Window.h>
+#endif
+
+#ifdef VSGSDL_PLATFORM_XCB
+#include <vsg/platform/xcb/Xcb_Window.h>
+#endif
+
 namespace vsgSDL {
     class vsgSDL_LIB Window {
     public:
