@@ -35,6 +35,7 @@ namespace vsgSDL {
 
         SDL_DestroyWindow(sdlWindow);
         SDL_Quit();
+
         SDL_Vulkan_UnloadLibrary();
     }
 
@@ -99,26 +100,38 @@ namespace vsgSDL {
     }
 
     bool Window::initSDLVulkan(std::string dynLib) const {
+<<<<<<< Updated upstream:src/vsgSDL/window.cpp
         if (dynLib == "")
             return SDL_Vulkan_LoadLibrary(NULL) != -1;
         else
             return SDL_Vulkan_LoadLibrary(dynLib.c_str()) != -1;
+=======
+        if(dynLib == "" || dynLib.length() == 0) {
+            if(SDL_Vulkan_LoadLibrary(NULL) == -1)
+                return false;
+        } else {
+            if(SDL_Vulkan_LoadLibrary(dynLib.c_str()) == -1)
+                return false;
+        }
+
+        return true;
+>>>>>>> Stashed changes:src/window.cpp
     }
 
     bool Window::initSDLVulkanSurface() {
+        SDL_vulkanSurface vulkanSurface;
+
         unsigned int pCount;
         SDL_Vulkan_GetInstanceExtensions(sdlWindow, &pCount, NULL);
         const char **pNames = static_cast<const char**>(malloc(sizeof(const char*)*pCount));
         SDL_Vulkan_GetInstanceExtensions(sdlWindow, &pCount, pNames);
         vsg::Names instanceExtensionsUnused;
 
-        for(size_t i = 0; i < pCount; i++) {
+        for(size_t i = 0; i < pCount; i++)
             instanceExtensionsUnused.push_back(pNames[i]);
-        }
 
-        SDL_vulkanSurface vulkanSurface;
         SDL_vulkanInstance vulkanInstance = *instance;
-        if(SDL_Vulkan_CreateSurface(sdlWindow, vulkanInstance, &vulkanSurface) == SDL_FALSE)
+        if(SDL_Vulkan_CreateSurface(sdlWindow, vulkanInstance, &vulkanSurface) != SDL_TRUE)
             return false;
 
         surface = vsg::Surface::create(vulkanSurface, instance);
@@ -143,21 +156,21 @@ namespace vsgSDL {
     }
 
     bool Window::create(std::string title, int x, int y, uint32_t width, uint32_t height, Uint32 sdlWinFlags,
-                        bool vulkanDebugLayer, bool vulkanAPIDumpLayer, std::string vulkanDynLib) {
+                        bool vulkanDebugLayer, bool vulkanAPIDumpLayer, std::string vulkanLoaderDynLib) {
         if(!initInstance(title, width, height, vulkanDebugLayer, vulkanAPIDumpLayer))
             return false;
 
         if(!initSDL())
             return false;
 
-        if(!initSDLVulkan(vulkanDynLib))
+        if(!initSDLVulkan(vulkanLoaderDynLib))
             return false;
 
         traits->x = x;
         traits->y = y;
         sdlWindow = SDL_CreateWindow(
                         traits->windowTitle.c_str(), traits->x, traits->y, traits->width, traits->height,
-                        sdlWinFlags);
+                        sdlWinFlags | SDL_WINDOW_VULKAN);
         if(sdlWindow == nullptr)
             return false;
 
@@ -195,6 +208,8 @@ namespace vsgSDL {
                 vsg::KeySymbol keySymbol = vsg::KEY_Undefined, modifiedKeySymbol = vsg::KEY_Undefined;
                 vsg::KeyModifier keyModifier = vsg::KeyModifier::MODKEY_Control;
 
+
+                // get mod state
                 if(keyboardMap->getKeyContinuously(key, keySymbol, modifiedKeySymbol, keyModifier)) {
                     vsg::clock::time_point event_time = vsg::clock::now();
                     adapter->bufferedEvents.emplace_back(vsg::KeyPressEvent::create(
@@ -202,6 +217,8 @@ namespace vsgSDL {
                 }
 
             } else if(releasedSLF) {
+
+                //get mod state ? already in getkeycont? not working .. for control + alt etc.
                 vsg::KeySymbol keySymbol = vsg::KEY_Undefined, modifiedKeySymbol = vsg::KEY_Undefined;
                 vsg::KeyModifier keyModifier = vsg::KeyModifier::MODKEY_Control;
 

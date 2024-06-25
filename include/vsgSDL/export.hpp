@@ -5,3 +5,6 @@
 #else
 #define vsgSDL_LIB
 #endif
+
+namespace vsgSDL {
+}

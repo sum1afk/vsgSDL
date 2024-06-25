@@ -18,7 +18,7 @@ namespace vsgSDL {
         std::function<void(const vsg::ref_ptr<vsg::Viewer>)> renderDeinit;
 
         bool create(std::string title, int x, int y, uint32_t width, uint32_t height, Uint32 sdlWinFlags,
-                    bool vulkanDebugLayer, bool vulkanAPIDumpLayer, std::string vulkanDynLib = "");
+                    bool vulkanDebugLayer, bool vulkanAPIDumpLayer, std::string vulkanLoaderDynLib);
 
         bool process(const bool continuousKey);
     private:
@@ -33,10 +33,10 @@ namespace vsgSDL {
         bool initInstance(std::string title, uint32_t width, uint32_t height,
                           bool debugLayer, bool apiDumpLayer);
         bool initSDL();
-        bool initSDLVulkan(std::string dynLib = "") const;
+        bool initSDLVulkan(std::string dynLib) const;
         bool initSDLVulkanSurface();
     protected:
-        void pollEvents(const bool continuousKey);
+        void pollEvents(const bool);
 
         void pollContinuousLast();
         void pollContinuous();
